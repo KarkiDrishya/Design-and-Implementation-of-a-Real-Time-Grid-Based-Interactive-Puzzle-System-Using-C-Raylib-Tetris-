@@ -6,6 +6,7 @@ Game::Game()
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    gameOver = false;
 }
 
 Block Game::GetRandomBlock()
@@ -34,6 +35,11 @@ void Game::Draw()
 void Game::HandleInput()
 {
     int keyPressed = GetKeyPressed(); // GetKeyPressed() is a raylib function that is used to detect the user input
+    if(gameOver && keyPressed !=0)
+    {
+        gameOver = false;
+        Reset();
+    }
     switch (keyPressed)
     {
     case KEY_LEFT: // KEY_LEFT is the left arrow key in the keyboard (<-)
@@ -52,28 +58,37 @@ void Game::HandleInput()
 }
 void Game ::MoveBlockLeft() // Moves Block left
 {
+    if(!gameOver)
+    {
     currentBlock.Move(0, -1);
         if(IsBlockOutside()||BlockFits() == false)//If IsBlockOutside returns true, the next line code undos the move
             {
                 currentBlock.Move(0,1);
             }
+    }
 }
 void Game ::MoveBlockDown() // Moves Block down
-{
+{   
+    if(!gameOver)
+    {
     currentBlock.Move(1, 0);
         if(IsBlockOutside()|| BlockFits() == false)
             {
                 currentBlock.Move(-1,0);
                 LockBlock();
             }
+    }
 }
 void Game ::MoveBlockRight() // Moves Block right
 {
+    if(!gameOver)
+    {
     currentBlock.Move(0, 1);
         if(IsBlockOutside()||BlockFits() == false)
             {
                 currentBlock.Move(0,-1);
             }
+    }
 }
 
 bool Game::IsBlockOutside() //checks whether the block is outside or not
@@ -106,6 +121,10 @@ void Game::LockBlock()
         grid.grid[item.row][item.column] = currentBlock.id;
     }
     currentBlock = nextBlock;
+    if(BlockFits() == false) //gameover
+    {
+        gameOver = true;
+    }
     nextBlock = GetRandomBlock();
     grid.ClearFullRows();
 }
@@ -121,4 +140,12 @@ bool Game::BlockFits() //used to check if the cells are empty or not
         }
     }
     return true;
+}
+
+void Game::Reset()
+{
+    grid.Initialize();
+    blocks = GetAllBlocks();
+    currentBlock = GetRandomBlock();
+    nextBlock = GetRandomBlock();
 }
