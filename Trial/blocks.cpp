@@ -13,6 +13,7 @@ public:
         cells[1] = {Position(0,1), Position(1,1),Position(2,1),Position(2,2)};
         cells[2] = {Position(1,0), Position(1,1),Position(1,2),Position(2,0)};
         cells[3] = {Position(0,0), Position(0,1),Position(1,1),Position(2,1)};
+        Move(0,3); // This line is written so that the blocks fall down from the center of the screen
     }
 };
 
@@ -26,6 +27,7 @@ class JBlock: public Block
             cells[1] = {Position(0,1),Position(0,2),Position(1,1),Position(2,1)};
             cells[2] = {Position(1,0),Position(1,1),Position(1,2),Position(2,2)};
             cells[3] = {Position(0,1),Position(1,1),Position(2,0),Position(2,1)};
+            Move(0,3);
         }
 };
 
@@ -39,19 +41,18 @@ class IBlock: public Block
             cells[1] = {Position(0,2),Position(1,2),Position(2,2),Position(3,2)};
             cells[2] = {Position(2,0),Position(2,1),Position(2,2),Position(2,3)};
             cells[3] = {Position(0,1),Position(1,1),Position(2,1),Position(3,1)};
+            Move(-1,3); //Center position is different for this line
         }
 };
 
 class OBlock: public Block
 {
     public:
-        OBlock()//Yellow block (O shaped Block)
+        OBlock()//Yellow block (O shaped Block)  This Oblock is a little tricky since it has the same occupied cells for every rotation and we use only one rotation state now and deal in the code when it is called
         {
             id = 4;
             cells[0] = {Position(0,0),Position(0,1),Position(1,0),Position(1,1)};
-            cells[1] = {Position(0,0),Position(0,1),Position(1,0),Position(1,1)};
-            cells[2] = {Position(0,0),Position(0,1),Position(1,0),Position(1,1)};
-            cells[3] = {Position(0,0),Position(0,1),Position(1,0),Position(1,1)};
+            Move(0,4); // Center position is different for this line
         }
 };
 
@@ -65,6 +66,7 @@ class SBlock : public Block
             cells[1] = {Position(0,1),Position(1,1),Position(1,2),Position(2,2)};
             cells[2] = {Position(1,1),Position(1,2),Position(2,0),Position(2,1)};
             cells[3] = {Position(0,0),Position(1,0),Position(1,1),Position(2,1)};
+            Move(0,3);
         }
 };
 
@@ -78,6 +80,7 @@ class TBlock : public Block
             cells[1] = {Position(0,1),Position(1,1),Position(1,2),Position(2,1)};
             cells[2] = {Position(1,0),Position(1,1),Position(1,2),Position(2,1)};
             cells[3] = {Position(0,1),Position(1,0),Position(1,1),Position(2,1)};
+            Move(0,3);
         }
 };
 
@@ -91,5 +94,6 @@ class Zblock : public Block
                 cells[1] = {Position(0,2),Position(1,1),Position(1,2),Position(2,1)};
                 cells[2] = {Position(1,0),Position(1,1),Position(2,1),Position(2,2)};
                 cells[3] = {Position(0,1),Position(1,0),Position(1,1),Position(2,0)};
+                Move(0,3);
         }
 };

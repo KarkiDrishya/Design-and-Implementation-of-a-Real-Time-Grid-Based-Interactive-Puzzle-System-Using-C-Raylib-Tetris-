@@ -10,7 +10,7 @@ int main(void){
     
     grid.Print();
 
-    LBlock block = LBlock();
+    TBlock block = TBlock();
     
     while(WindowShouldClose()==false)
     {
