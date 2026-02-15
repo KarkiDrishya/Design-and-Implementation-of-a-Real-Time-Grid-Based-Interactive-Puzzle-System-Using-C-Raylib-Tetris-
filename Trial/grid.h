@@ -14,5 +14,6 @@ class Grid{
     Grid();
     void Initialize();
     void Print();
+    void Draw();
     int grid[20][10];
 };

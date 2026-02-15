@@ -7,6 +7,7 @@ Grid::Grid()
     numcols = 10;
     cellsize = 30;
     Initialize();
+    colors = GetCellColors();
 }
  void Grid::Initialize()
  {
@@ -37,5 +38,16 @@ Grid::Grid()
     Color purple = {166, 0 , 247, 255};
     Color cyan = {21, 204, 209, 255};
     Color blue = {13, 64, 216, 255};
-
+    return {darkGrey, green, red, orange,yellow,purple, cyan, blue};
+ }
+ void Grid ::Draw()
+ {
+    for(int row = 0; row < numrows; row++)
+    {
+        for(int column = 0; column < numcols; column++)
+        {
+            int cellValue = grid[row][column];
+            DrawRectangle(column * cellsize+1,row*cellsize+1,cellsize-1,cellsize-1,colors[cellValue]);
+        }
+    }
  }
