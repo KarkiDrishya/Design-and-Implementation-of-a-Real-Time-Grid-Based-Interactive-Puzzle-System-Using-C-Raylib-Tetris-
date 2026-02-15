@@ -4,7 +4,7 @@
 @echo off 
 
 
-g++ grid.cpp main.cpp position.cpp colors.cpp block.cpp blocks.cpp -I C:/raylib/include -L C:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm -o Tetris.exe
+g++ grid.cpp main.cpp position.cpp colors.cpp block.cpp blocks.cpp game.cpp -I C:/raylib/include -L C:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm -o Tetris.exe
 
 :: Here we check if the Compilation was successful or not
 ::So since MADLADS.exe is overwriiten each time this if else loop just checks
@@ -27,3 +27,5 @@ IF EXIST Tetris.exe (
 ::pause ensures the window remains open and also says press any key to continue for exitting the game
 echo.
 
+
+echo 
