@@ -45,17 +45,50 @@ void Game::HandleInput()
     case KEY_DOWN: // KEY_Down is the down arrow key in the keyboard
         MoveBlockDown();
         break;
+    case KEY_UP://KEY_UP is used to rotate the blocks
+        RotateBlock();
+        break;
     }
 }
 void Game ::MoveBlockLeft() // Moves Block left
 {
     currentBlock.Move(0, -1);
+        if(IsBlockOutside())//If IsBlockOutside returns true, the next line code undos the move
+            {
+                currentBlock.Move(0,1);
+            }
 }
 void Game ::MoveBlockDown() // Moves Block down
 {
     currentBlock.Move(1, 0);
+        if(IsBlockOutside())
+            {
+                currentBlock.Move(-1,0);
+            }
 }
 void Game ::MoveBlockRight() // Moves Block right
 {
     currentBlock.Move(0, 1);
+        if(IsBlockOutside())
+            {
+                currentBlock.Move(0,-1);
+            }
+}
+
+bool Game::IsBlockOutside() //checks whether the block is outside or not
+{
+    std::vector<Position> tiles = currentBlock.GetCellPositions();
+        for(Position item : tiles)
+            {
+                if(grid.IsCellOutside(item.row,item.column))
+                {
+                    return true;
+                }
+            }
+        return false;
+}
+
+void Game :: RotateBlock()
+{
+    currentBlock.Rotate();
 }

@@ -12,6 +12,7 @@ public:
     void Draw(); // Declartion of draw function fro block.cpp
     void Move(int rows, int columns);
     std::vector<Position> GetCellPositions();
+    void Rotate(); //Used to rotate the blocks
     int id;
     map<int, vector<Position>> cells; // this is the map function which uses key-value pair, syntax : map<int(rotation state, eg : 0,1,2,3), value(the list of vector which holds the 4 co ordinates, (0,1)(1,0)...)
 private:

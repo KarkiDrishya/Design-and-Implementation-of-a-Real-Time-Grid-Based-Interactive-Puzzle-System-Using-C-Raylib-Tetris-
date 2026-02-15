@@ -16,5 +16,6 @@ public:
     void Initialize();
     void Print();
     void Draw();
+    bool IsCellOutside(int row, int column); // this checks whether the cell is going outside the boundary or not
     int grid[20][10];
 };

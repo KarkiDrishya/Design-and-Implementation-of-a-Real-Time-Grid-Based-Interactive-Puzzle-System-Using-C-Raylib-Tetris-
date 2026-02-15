@@ -34,3 +34,12 @@ std::vector<Position>Block::GetCellPositions()
     }
     return movedTiles;
 }
+
+void Block::Rotate()
+{
+    rotationState ++;//Everytime the block is rotated this counter goes up, keeps track
+    if(rotationState == (int)cells.size()) //if the rotation is done 4 times, it will reset back to the original orientation/rotation
+        {
+            rotationState = 0;
+        }
+}
