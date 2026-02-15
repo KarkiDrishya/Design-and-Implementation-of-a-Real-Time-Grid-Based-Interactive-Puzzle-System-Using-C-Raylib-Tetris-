@@ -9,6 +9,9 @@ private:
     int numrows;
     int numcols;
     int cellsize;
+    bool IsRowFull(int row);
+    void ClearRow(int row);
+    void MoveRowDown(int row, int numRows);
     vector<Color> colors;
 
 public:
@@ -17,5 +20,7 @@ public:
     void Print();
     void Draw();
     bool IsCellOutside(int row, int column); // this checks whether the cell is going outside the boundary or not
+    bool IsCellEmpty(int row, int column);
+    int ClearFullRows();
     int grid[20][10];
 };

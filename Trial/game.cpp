@@ -53,7 +53,7 @@ void Game::HandleInput()
 void Game ::MoveBlockLeft() // Moves Block left
 {
     currentBlock.Move(0, -1);
-        if(IsBlockOutside())//If IsBlockOutside returns true, the next line code undos the move
+        if(IsBlockOutside()||BlockFits() == false)//If IsBlockOutside returns true, the next line code undos the move
             {
                 currentBlock.Move(0,1);
             }
@@ -61,15 +61,16 @@ void Game ::MoveBlockLeft() // Moves Block left
 void Game ::MoveBlockDown() // Moves Block down
 {
     currentBlock.Move(1, 0);
-        if(IsBlockOutside())
+        if(IsBlockOutside()|| BlockFits() == false)
             {
                 currentBlock.Move(-1,0);
+                LockBlock();
             }
 }
 void Game ::MoveBlockRight() // Moves Block right
 {
     currentBlock.Move(0, 1);
-        if(IsBlockOutside())
+        if(IsBlockOutside()||BlockFits() == false)
             {
                 currentBlock.Move(0,-1);
             }
@@ -91,4 +92,33 @@ bool Game::IsBlockOutside() //checks whether the block is outside or not
 void Game :: RotateBlock()
 {
     currentBlock.Rotate();
+    if(IsBlockOutside()||BlockFits()==false)
+    {
+        currentBlock.UndoRotation();
+    }
+}
+
+void Game::LockBlock()
+{
+    std::vector<Position> tiles = currentBlock.GetCellPositions();
+    for(Position item : tiles)
+    {
+        grid.grid[item.row][item.column] = currentBlock.id;
+    }
+    currentBlock = nextBlock;
+    nextBlock = GetRandomBlock();
+    grid.ClearFullRows();
+}
+
+bool Game::BlockFits() //used to check if the cells are empty or not
+{
+    std::vector<Position> tiles = currentBlock.GetCellPositions();
+    for(Position item : tiles)
+    {
+        if(grid.IsCellEmpty(item.row, item.column)==false)
+        {
+            return false; //basically returns false if cell is not empty, true if it is empty
+        }
+    }
+    return true;
 }
